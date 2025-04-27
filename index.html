@@ -1,0 +1,21 @@
+function sendToWebhook(heroName) {
+    const nickname = document.getElementById("nickname").value;
+    const payload = {
+        content: `ヒーロー診断結果:\nニックネーム: ${nickname}\nヒーロー: ${heroName}`
+    };
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Webhook送信成功:", data);
+    })
+    .catch(error => {
+        console.error("Webhook送信エラー:", error);
+    });
+}
